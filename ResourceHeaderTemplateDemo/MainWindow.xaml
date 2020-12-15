@@ -11,12 +11,12 @@
         mc:Ignorable="d"
         Title="ResourceHeaderTemplateDemo" Height="600" Width="950" WindowStartupLocation="CenterScreen">
     <Window.Resources>
-        <x:Array x:Key="schedulerViewTypes" Type="system:String">
-            <system:String>Day</system:String>
-            <system:String>Week</system:String>
-            <system:String>WorkWeek</system:String>
-            <system:String>Timeline</system:String>
-        </x:Array>
+        <ObjectDataProvider x:Key="schedulerviewtypes" MethodName="GetValues"
+                            ObjectType="{x:Type system:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type  Type="{x:Type syncfusion:SchedulerViewType}"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
         <ObjectDataProvider x:Key="resourceGrouptypes" MethodName="GetValues"
                             ObjectType="{x:Type system:Enum}">
             <ObjectDataProvider.MethodParameters>
@@ -27,14 +27,14 @@
             <Grid Background="Transparent">
                 <Border BorderThickness="0.3,0.3,0,0.3" BorderBrush="Gray" >
                     <StackPanel VerticalAlignment="Center" Orientation="Vertical">
-                        <Border CornerRadius="36" Height="72" Width="72" BorderThickness="4" BorderBrush="{Binding BackgroundBrush}">
+                        <Border CornerRadius="36" Height="72" Width="72" BorderThickness="4" BorderBrush="{Binding Data.BackgroundBrush}">
                             <Border CornerRadius="36" Height="64" Width="64" BorderThickness="4" BorderBrush="White">
                                 <Image HorizontalAlignment="Center" VerticalAlignment="Center" Width="55"
-                          Height="55" Source="{Binding ImageSource}" />
+                          Height="55" Source="{Binding Data.ImageSource}" />
                             </Border>
                         </Border>
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"
-                   Foreground="Black" Text="{Binding Name}" />
+                Foreground="Black" Text="{Binding Data.Name}" />
                     </StackPanel>
                 </Border>
             </Grid>
@@ -64,8 +64,8 @@
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             Margin="0,0,25,0">
-            <ComboBox x:Name="schedulerViewTypeComboBox" ItemsSource="{Binding Source={StaticResource schedulerViewTypes}}"
-                                 SelectedIndex="1" Width="100" Margin="5"/>
+            <ComboBox x:Name="schedulerViewTypeComboBox" ItemsSource="{Binding Source={StaticResource schedulerviewtypes}}"
+                                 SelectedIndex="1" Width="150" Margin="5"/>
             <ComboBox x:Name="resourceGroupTypeComboBox" ItemsSource="{Binding Source={StaticResource resourceGrouptypes}}"
                                  SelectedIndex="1"  Width="100" Margin="5"/>
         </StackPanel>
