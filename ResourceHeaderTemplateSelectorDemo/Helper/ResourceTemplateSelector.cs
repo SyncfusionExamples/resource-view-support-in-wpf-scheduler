@@ -34,7 +34,7 @@ namespace ResourceViewDemo
             if (schedule == null)
                 return null;
 
-            if (schedule.ViewType != SchedulerViewType.Timeline)
+            if (schedule.ViewType == SchedulerViewType.Day || schedule.ViewType == SchedulerViewType.Week || schedule.ViewType == SchedulerViewType.WorkWeek)
                 return DayViewResourceTemplate;
             else
                 return TimelineViewResourceTemplate;
